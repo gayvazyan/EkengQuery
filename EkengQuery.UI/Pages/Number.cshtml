@@ -1,0 +1,40 @@
+﻿@page "/Number"
+@model EkengQuery.UI.Pages.NumberModel
+@{
+    <form method="post" id="form">
+        <div class="card-header">
+            <h5> Մուտքագրեք թիվ</h5>
+            <div class="card-header-actions">
+                <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="true">
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body row">
+                <div class="m-3 p-3 w-100">
+                    <div class="row margin-top-20">
+
+                        <div class="col-9">
+                            <input class="form-control" type="text" asp-for="@Model.NumberInt" placeholder="թիվ">
+                            <span asp-validation-for="@Model.NumberInt" class="text-danger"></span>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-primary text-white"><i class="cil-sync"></i> Մուտք</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row margin-top-20">
+
+                        <h1>@Model.NumberText</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    
+}
+

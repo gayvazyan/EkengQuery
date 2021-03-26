@@ -1,6 +1,8 @@
+using EkengQuery.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +25,15 @@ namespace EkengQuery.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //database Connection part
+
+            services.AddDbContext<SearchContext>(options =>
+                     options.UseSqlServer(Configuration.GetConnectionString("cecsystemsDatabase")));
+
+            services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IBPRQuery, BPRQuery>();
+            services.AddHttpClient();
+
             services.AddRazorPages();
         }
 

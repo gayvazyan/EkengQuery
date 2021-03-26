@@ -1,0 +1,91 @@
+﻿@page "/QueryBPR"
+@model EkengQuery.UI.Pages.SsnQueryBPRModel
+@{
+    <form method="post" enctype="multipart/form-data">
+        <div class="card-header">
+            <h5> Մուտքագրեք ՀԾՀ համարը</h5>
+            <div class="card-header-actions">
+                <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="true">
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="m-3 p-3 w-100">
+                    <div class="row margin-top-20">
+
+                        <div class="col-9">
+                            <input class="form-control" type="text" asp-for="@Model.Ssn" placeholder="ա.հ.փ.">
+                            <span asp-validation-for="@Model.Ssn" class="text-danger"></span>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn btn-danger text-white" onclick="Reset()">Մաքրել</a>
+                            <button class="btn btn-primary text-white"><i class="cil-sync"></i> Որոնել</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+
+
+        @if (Model.Citizen != null && !String.IsNullOrEmpty(Model.Ssn))
+        {
+            <div class="row margin-top-20">
+                <div class="col-12">
+                    <center>
+                        <h5> Տվյալները որը ստացվում է ԲՊՌ սերվերից </h5>
+                    </center>
+                </div>
+                <div class="col-12">
+                    <center>
+                        <h3 style="color:green"> SSN-ը: @Model.Ssn  </h3>
+                    </center>
+                    <center>
+                        <h3 style="color:green">  Անունը:  @Model.Citizen.FirstName</h3>
+                    </center>
+                    <center>
+                        <h3 style="color:green"> Ազգանուն: @Model.Citizen.LastName</h3>
+                    </center>
+                    <center>
+                        <h3 style="color:green">Հայրանուն: @Model.Citizen.MiddleName</h3>
+                    </center>
+                    <center>
+                        <h3 style="color:green">Ծննդյան ամսաթիվ: @Model.Citizen.BirthDate</h3>
+                    </center>
+                    <center>
+                        <h3 style="color:green">Սեռ: @Model.Citizen.Gender</h3>
+                    </center>
+                </div>
+                 <div class="col-12">
+                    <center>
+                         <img style="width:200px" src="@Model.ImageSource" alt="@(Model.Citizen.LastName + " " +  Model.Citizen.FirstName)">
+                    </center>
+                </div>
+            </div>
+        }
+
+        else
+        {
+            <div class="row margin-top-20">
+                <div class="col-12">
+                    <center>
+                        <h5 style="color:red">  @Model.Citizen.ErrorMessage </h5>
+                    </center>
+                </div>
+            </div>
+        }
+
+        @section scripts{
+            <script>
+                function Reset() {
+                    $("#Ssn").val(null);
+                    $("form").submit();
+                }
+            </script>
+        }
+
+    </form>
+}
+
